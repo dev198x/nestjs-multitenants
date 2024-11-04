@@ -1,0 +1,56 @@
+@BASE_API_URL = http://localhost:3000
+
+# #### 
+# # @name user_login
+# curl -X 'POST' \
+#   '{{BASE_API_URL}}/auth/login' \
+#   -H 'accept: */*' \
+#   -H 'Content-Type: application/json' \
+#   -d '{
+#     "password": "12345678",
+#     "email": "user1@yopmail.com"
+#   }'
+
+# @USER_JWT                = {{user_login.response.body.accessToken}}
+
+# #### tenants create new a company
+# curl -X 'POST' \
+#   '{{BASE_API_URL}}/tenants/create-company' \
+#   -H 'accept: */*' \
+#   -H 'Content-Type: application/json' \
+#   -d '{
+#   "companyName": "companyName1",
+#   "user": {
+#     "name": "name1",
+#     "password": "12345678",
+#     "email": "user1@yopmail.com"
+#   }
+# }'
+
+##### public get tenants
+curl -X 'GET' \
+  '{{BASE_API_URL}}/tenants' \
+  -H 'X-TENANT-ID: 925Fx6uN6vPO'
+
+##### public post tenants
+curl -X 'POST' \
+  '{{BASE_API_URL}}/tenants' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "companyName1"
+}'
+
+
+##### private get cats
+curl -X 'GET' \
+  '{{BASE_API_URL}}/cats' \
+  -H 'X-TENANT-ID: ad4239f3-0fd1-4147-8553-6e856956b9e1'
+
+##### private post cats
+curl -X 'POST' \
+  '{{BASE_API_URL}}/cats' \
+  -H 'Content-Type: application/json' \
+  -H 'X-TENANT-ID: ad4239f3-0fd1-4147-8553-6e856956b9e1'
+  -d '{
+  "name": "cat1"
+}'
